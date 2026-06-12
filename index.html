@@ -1,60 +1,1998 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wycieczka do Karpacza</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      padding: 20px;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-      margin: 10px 0;
-    }
-    .link {
-      display: block;
-      margin: 15px 0;
-      padding: 10px;
-      background: #e8f0fe;
-      border-radius: 6px;
-      text-decoration: none;
-      color: #1a73e8;
-      font-weight: bold;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wycieczka do Karpacza – 1–3 Lutego 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --snow: #f2f6fc;
+  --ice: #e4edf9;
+  --mountain: #142d4c;
+  --mountain2: #1a3a60;
+  --peak: #2557a7;
+  --peak-light: #3b72c9;
+  --forest: #1b4535;
+  --pine: #256b48;
+  --gold: #d9920a;
+  --gold-light: #f5b731;
+  --text: #0d1b2a;
+  --muted: #5a7290;
+  --lighter: #8aa4bb;
+  --card: #ffffff;
+  --border: rgba(37,87,167,0.13);
+  --border2: rgba(37,87,167,0.22);
+  --sidebar-w: 280px;
+  --r: 12px;
+  --rs: 7px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--snow);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  max-height: 860px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(170deg, #071525 0%, #0e2640 30%, #163a60 60%, #1a5448 100%);
+}
+
+.hero-mountains {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  width: 100%; height: 60%;
+  pointer-events: none;
+}
+
+.snow-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.flake {
+  position: absolute;
+  top: -14px;
+  color: rgba(255,255,255,0.75);
+  animation: fall linear infinite;
+  user-select: none;
+}
+@keyframes fall { to { transform: translateY(110vh) rotate(420deg); opacity: 0; } }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 2rem 3rem;
+  max-width: 860px;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(217,146,10,0.18);
+  border: 1px solid rgba(245,183,49,0.45);
+  color: #f5c84a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 7px 20px;
+  border-radius: 100px;
+  margin-bottom: 1.8rem;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.0;
+  margin-bottom: 0.6rem;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.45);
+}
+.hero h1 em {
+  font-style: normal;
+  color: #6ec6f5;
+  display: block;
+  font-size: 0.7em;
+  letter-spacing: 0;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.68);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin-bottom: 2.8rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 0;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--r);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.06);
+  max-width: 560px;
+  margin: 0 auto 2.5rem;
+}
+.hero-stat {
+  flex: 1;
+  padding: 1.1rem 1rem;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat strong {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #6ec6f5;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat span {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Doc button hero */
+.hero-doc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 11px 24px;
+  border-radius: 100px;
+  transition: background 0.2s, border-color 0.2s;
+  letter-spacing: 0.3px;
+}
+.hero-doc-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.45);
+}
+.hero-doc-btn svg { opacity: 0.8; }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255,255,255,0.38);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  animation: sbounce 2.5s ease-in-out infinite;
+}
+.scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 42px;
+  background: rgba(255,255,255,0.25);
+  margin: 10px auto 0;
+}
+@keyframes sbounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-5px)} }
+
+/* ═══════════════════════════════════
+   DESKTOP APP LAYOUT
+═══════════════════════════════════ */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--snow);
+}
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--mountain);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.1) transparent;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+.sidebar-header {
+  padding: 1.8rem 1.4rem 1.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0.6rem;
+}
+.sidebar-logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--peak), #4a8fd4);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.sidebar-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+.sidebar-logo-text small {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.5px;
+  margin-top: 1px;
+}
+.sidebar-dates {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+}
+
+.sidebar-section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+  padding: 1.2rem 1.4rem 0.4rem;
+}
+
+/* Nav items */
+.nav-day {
+  margin: 0 0.7rem 0.2rem;
+  border-radius: 9px;
+  overflow: hidden;
+}
+.nav-day-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0.7rem 0.85rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 9px;
+  transition: background 0.15s;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+}
+.nav-day-btn:hover { background: rgba(255,255,255,0.07); }
+.nav-day-btn.active { background: rgba(255,255,255,0.12); }
+
+.nav-day-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.08);
+  transition: background 0.15s;
+}
+.nav-day-btn.active .nav-day-icon { background: var(--peak); }
+
+.nav-day-info { flex: 1; min-width: 0; }
+.nav-day-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.nav-day-btn.active .nav-day-label { color: #fff; }
+.nav-day-date {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.35);
+  margin-top: 1px;
+}
+
+.nav-day-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.5);
+  padding: 2px 7px;
+  border-radius: 100px;
+  flex-shrink: 0;
+}
+.nav-day-btn.active .nav-day-badge {
+  background: var(--gold);
+  color: #fff;
+}
+
+/* Progress in sidebar */
+.sidebar-progress {
+  margin: 0.8rem 1.4rem 0;
+  padding: 0.9rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 9px;
+  border: 1px solid rgba(255,255,255,0.07);
+}
+.sidebar-progress-label {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+.sidebar-progress-label span { color: #6ec6f5; font-weight: 600; }
+.progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--peak), #6ec6f5);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Sidebar doc button */
+.sidebar-doc-btn {
+  margin: 1rem 0.7rem 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0.75rem 1rem;
+  background: rgba(37,87,167,0.25);
+  border: 1px solid rgba(37,87,167,0.4);
+  border-radius: 9px;
+  color: #7ab8f5;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+  cursor: pointer;
+}
+.sidebar-doc-btn:hover {
+  background: rgba(37,87,167,0.4);
+  border-color: rgba(37,87,167,0.6);
+  color: #a8d0ff;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 1rem 1.4rem 1.4rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.sidebar-footer p {
+  font-size: 0.62rem;
+  color: rgba(255,255,255,0.22);
+  line-height: 1.6;
+}
+
+/* ─── MAIN CONTENT ─── */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top bar */
+.topbar {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  flex-shrink: 0;
+}
+.topbar-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--mountain);
+}
+.topbar-title span {
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 6px;
+  font-size: 0.82rem;
+}
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.topbar-doc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--peak);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 7px;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.topbar-doc-btn:hover { background: var(--peak-light); }
+
+.topbar-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: var(--ice);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+.topbar-chip .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #34c474;
+  box-shadow: 0 0 0 2px rgba(52,196,116,0.3);
+}
+
+/* ─── CONTENT AREA ─── */
+.content-area {
+  padding: 2.5rem 2.5rem 5rem;
+  flex: 1;
+}
+
+/* Day section */
+.day-section { display: none; }
+.day-section.visible { display: block; }
+
+/* Day hero banner */
+.day-banner {
+  border-radius: var(--r);
+  padding: 2rem 2.4rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 140px;
+}
+.day-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.day-banner-content { position: relative; z-index: 1; }
+.day-banner-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.35rem;
+}
+.day-banner h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 0.3rem;
+}
+.day-banner-sub {
+  font-size: 0.82rem;
+  opacity: 0.75;
+  max-width: 440px;
+}
+.day-banner-meta {
+  position: relative;
+  z-index: 1;
+  text-align: right;
+  flex-shrink: 0;
+}
+.day-banner-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+.day-banner-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.highlight-chip {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.15);
+  white-space: nowrap;
+}
+
+/* Banner color themes */
+.banner-blue { background: linear-gradient(120deg, #1a3a60, #2557a7); color: #fff; }
+.banner-green { background: linear-gradient(120deg, #1b4535, #256b48); color: #fff; }
+.banner-amber { background: linear-gradient(120deg, #7a4500, #bf7a00); color: #fff; }
+.banner-info  { background: linear-gradient(120deg, #1a2f50, #2a4980); color: #fff; }
+
+/* ─── GRID LAYOUT FOR CONTENT ─── */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Right column cards */
+.side-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.25rem;
+  margin-bottom: 1.2rem;
+}
+.side-card-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Weather card */
+.weather-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.weather-item {
+  background: var(--ice);
+  border-radius: var(--rs);
+  padding: 0.7rem 0.8rem;
+  text-align: center;
+}
+.weather-item-icon { font-size: 1.3rem; margin-bottom: 3px; }
+.weather-item-val { font-size: 0.9rem; font-weight: 700; color: var(--mountain); }
+.weather-item-lbl { font-size: 0.62rem; color: var(--muted); margin-top: 1px; }
+
+/* Attractions card */
+.attraction-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.attraction-item:last-child { border-bottom: none; padding-bottom: 0; }
+.attraction-icon {
+  width: 34px; height: 34px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  background: var(--ice);
+}
+.attraction-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
+.attraction-desc { font-size: 0.73rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+
+/* Doc card */
+.doc-card {
+  background: linear-gradient(135deg, var(--mountain), var(--mountain2));
+  color: #fff;
+  border: none;
+}
+.doc-card .side-card-title { color: rgba(255,255,255,0.5); }
+.doc-card-body { font-size: 0.82rem; color: rgba(255,255,255,0.7); margin-bottom: 1rem; line-height: 1.6; }
+.doc-open-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  text-decoration: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.15s;
+  width: 100%;
+  justify-content: center;
+}
+.doc-open-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* ─── TIMELINE ─── */
+.timeline-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.5rem 1.75rem;
+}
+.timeline-wrap-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 1.75rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--peak) 0%, var(--pine) 60%, rgba(0,0,0,0.04) 100%);
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.timeline-item.revealed { opacity: 1; transform: translateX(0); }
+
+.timeline-dot {
+  position: absolute;
+  left: -1.875rem;
+  top: 15px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--peak);
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px rgba(37,87,167,0.18);
+  transition: transform 0.2s;
+  z-index: 1;
+}
+.timeline-item:hover .timeline-dot { transform: scale(1.5); }
+.timeline-dot.gold {
+  background: var(--gold);
+  box-shadow: 0 0 0 3px rgba(217,146,10,0.22);
+}
+
+.timeline-card {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  transition: box-shadow 0.18s, transform 0.18s, border-color 0.18s;
+}
+.timeline-item:hover .timeline-card {
+  box-shadow: 0 3px 16px rgba(37,87,167,0.1);
+  border-color: var(--border2);
+  transform: translateX(3px);
+}
+.timeline-item.milestone .timeline-card {
+  border-left: 3px solid var(--gold);
+  background: linear-gradient(to right, #fffbf2, #fff);
+}
+
+.time-col {
+  flex-shrink: 0;
+  width: 48px;
+  text-align: center;
+  padding-top: 2px;
+}
+.time-val {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--peak);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  display: block;
+}
+.time-sep { width: 20px; height: 1px; background: var(--border); margin: 4px auto; }
+
+.event-icon-box {
+  flex-shrink: 0;
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  background: var(--ice);
+}
+
+.event-body { flex: 1; min-width: 0; }
+.event-title {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+.event-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.event-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.event-tag {
+  display: inline-block;
+  font-size: 0.67rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+.tag-gold    { background: #fff3cd; color: #7a4d00; border: 1px solid #f5d87a; }
+.tag-green   { background: #e0f3e8; color: #1b5c32; border: 1px solid #8fd4a8; }
+.tag-meal    { background: #fde8d8; color: #7a3500; border: 1px solid #f0a878; }
+.tag-night   { background: #edeaf8; color: #3d2c8c; border: 1px solid #b8aee8; }
+
+/* ─── INFO / CHECKLIST TAB ─── */
+.info-banner {
+  background: linear-gradient(120deg, var(--forest), var(--mountain));
+  color: #fff;
+  border-radius: var(--r);
+  padding: 2rem 2.4rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.info-banner h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  margin-bottom: 0.4rem;
+}
+.info-banner p { font-size: 0.85rem; color: rgba(255,255,255,0.65); max-width: 420px; }
+
+.info-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.1rem;
+  text-align: center;
+}
+.info-card-ico { font-size: 1.6rem; margin-bottom: 6px; }
+.info-card-lbl { font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-bottom: 3px; }
+.info-card-val { font-size: 1rem; font-weight: 700; color: var(--mountain); }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+.checklist-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.4rem;
+}
+.checklist-card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--mountain);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.progress-summary {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.checklist-list { display: flex; flex-direction: column; gap: 4px; }
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 8px;
+  border-radius: var(--rs);
+  cursor: pointer;
+  transition: background 0.12s;
+  font-size: 0.82rem;
+  user-select: none;
+}
+.check-item:hover { background: var(--ice); }
+.check-box {
+  width: 17px; height: 17px;
+  border: 1.5px solid var(--border2);
+  border-radius: 4px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+  background: #fff;
+}
+.check-item.done .check-box { background: var(--peak); border-color: var(--peak); color: #fff; font-size: 10px; font-weight: 700; }
+.check-item.done .check-label { color: var(--lighter); text-decoration: line-through; }
+
+/* Rules card */
+.rules-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.4rem;
+}
+.rules-card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--mountain);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.rule-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+.rule-item:last-child { border-bottom: none; padding-bottom: 0; }
+.rule-item-icon { flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--mountain);
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  padding: 2.5rem 2rem;
+  font-size: 0.78rem;
+  line-height: 2;
+}
+footer strong { color: rgba(255,255,255,0.75); font-size: 1rem; font-family: 'Playfair Display', serif; }
+
+/* Scroll reveal on sidebar active */
+.nav-day-btn.active .nav-day-label { color: #fff; }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Wycieczka do Karpacza</h1>
 
-    <p>Szukasz wrażeń i niezapomnianych przygód, to idealnie trafiłeś !!! zapraszamy do miejsca,w którym przeżyjesz niezapomniane chwile z przyjaciółmi.
-      Znaleźliśmy idealne miejsce odpoczynkowe w Karpaczu z okazyjną ceną. Jeśli chcesz się skontaktować pisz na maila aaronideszpiwnicy@gmail.com</p>
+<!-- ═══════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<header class="hero" id="top">
+  <div class="snow-layer" id="snowLayer"></div>
 
-    <!-- Link do Google Dysku -->
-    <a class="link" href="https://drive.google.com/drive/folders/18ES_VxEI9P9Qm_HLpfGeq_rHHi6HpWW5?usp=drive_link" target="_blank">
-      📁 Link do planu wycieczki, wyceny i regulaminu.
+  <svg class="hero-mountains" viewBox="0 0 1440 340" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="mg1" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(14,38,64,0.9)"/>
+        <stop offset="100%" stop-color="rgba(14,38,64,0.3)"/>
+      </linearGradient>
+      <linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="rgba(20,50,80,0.85)"/>
+        <stop offset="100%" stop-color="rgba(20,50,80,0.2)"/>
+      </linearGradient>
+    </defs>
+    <!-- Back range -->
+    <path d="M0,340 L0,220 L90,195 L180,155 L270,110 L360,80 L430,55 L490,30 L530,8 L565,0 L600,10 L640,35 L700,68 L760,95 L840,75 L900,55 L960,70 L1020,100 L1100,75 L1170,95 L1250,115 L1330,135 L1440,150 L1440,340 Z" fill="url(#mg1)"/>
+    <!-- Snow caps back -->
+    <path d="M450,55 L470,38 L490,30 L510,38 L530,8 L550,22 L565,0 L580,16 L600,10 L620,20 L640,35 Z" fill="rgba(255,255,255,0.88)"/>
+    <path d="M860,68 L880,55 L900,55 L920,66 L940,50 L960,70 Z" fill="rgba(255,255,255,0.75)"/>
+    <path d="M1080,72 L1100,75 L1115,62 L1130,75 Z" fill="rgba(255,255,255,0.6)"/>
+    <!-- Front range -->
+    <path d="M0,340 L0,260 L140,240 L230,215 L310,195 L390,175 L470,165 L530,148 L570,132 L600,120 L640,132 L680,155 L740,175 L810,162 L880,152 L950,165 L1020,188 L1100,172 L1180,185 L1270,200 L1360,215 L1440,225 L1440,340 Z" fill="url(#mg2)"/>
+    <!-- Conifer silhouettes -->
+    <g fill="rgba(25,65,48,0.6)">
+      <polygon points="80,270 88,250 96,270"/>
+      <polygon points="88,275 94,258 100,275"/>
+      <polygon points="1340,265 1348,244 1356,265"/>
+      <polygon points="1350,272 1358,252 1366,272"/>
+      <polygon points="200,260 208,240 216,260"/>
+      <polygon points="1140,268 1148,248 1156,268"/>
+    </g>
+    <!-- Stars -->
+    <circle cx="140" cy="20" r="1.5" fill="rgba(255,255,255,0.65)"/>
+    <circle cx="300" cy="40" r="1" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="420" cy="15" r="1.5" fill="rgba(255,255,255,0.6)"/>
+    <circle cx="750" cy="18" r="1" fill="rgba(255,255,255,0.55)"/>
+    <circle cx="1050" cy="28" r="1.5" fill="rgba(255,255,255,0.6)"/>
+    <circle cx="1320" cy="15" r="1" fill="rgba(255,255,255,0.5)"/>
+    <circle cx="1200" cy="35" r="1.5" fill="rgba(255,255,255,0.4)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-kicker">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Wycieczka szkolna 2027
+    </div>
+    <h1>Karpacz<em>Karkonosze</em></h1>
+    <p class="hero-sub">1 – 3 Lutego 2027 &nbsp;·&nbsp; 3 dni &nbsp;·&nbsp; Śnieżka 1602 m n.p.m. &nbsp;·&nbsp; Narty · Góry · Przygoda</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>3</strong><span>Dni</span></div>
+      <div class="hero-stat"><strong>1602</strong><span>m n.p.m.</span></div>
+      <div class="hero-stat"><strong>3</strong><span>Atrakcje</span></div>
+      <div class="hero-stat"><strong>7:00</strong><span>Zbiórka</span></div>
+    </div>
+
+    <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="hero-doc-btn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Otwórz regulamin i pełny plan wycieczki
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+    </a>
+  </div>
+
+  <div class="scroll-hint">Przewiń w dół</div>
+</header>
+
+<!-- ═══════════════════════════════
+     APP SHELL
+═══════════════════════════════════ -->
+<div class="app-shell">
+
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-icon">🏔️</div>
+        <div class="sidebar-logo-text">
+          Karpacz 2027
+          <small>Plan wycieczki szkolnej</small>
+        </div>
+      </div>
+      <div class="sidebar-dates">1 – 3 Lutego 2027</div>
+    </div>
+
+    <p class="sidebar-section-label">Plan dnia</p>
+
+    <div class="nav-day">
+      <button class="nav-day-btn active" onclick="showDay('d1')" id="btn-d1">
+        <div class="nav-day-icon">🏔️</div>
+        <div class="nav-day-info">
+          <div class="nav-day-label">Dzień 1 – Przyjazd</div>
+          <div class="nav-day-date">Pon, 1 Lutego</div>
+        </div>
+        <span class="nav-day-badge">11</span>
+      </button>
+    </div>
+    <div class="nav-day">
+      <button class="nav-day-btn" onclick="showDay('d2')" id="btn-d2">
+        <div class="nav-day-icon">⛰️</div>
+        <div class="nav-day-info">
+          <div class="nav-day-label">Dzień 2 – Góry</div>
+          <div class="nav-day-date">Wt, 2 Lutego</div>
+        </div>
+        <span class="nav-day-badge">11</span>
+      </button>
+    </div>
+    <div class="nav-day">
+      <button class="nav-day-btn" onclick="showDay('d3')" id="btn-d3">
+        <div class="nav-day-icon">⛷️</div>
+        <div class="nav-day-info">
+          <div class="nav-day-label">Dzień 3 – Stok</div>
+          <div class="nav-day-date">Śr, 3 Lutego</div>
+        </div>
+        <span class="nav-day-badge">9</span>
+      </button>
+    </div>
+    <div class="nav-day">
+      <button class="nav-day-btn" onclick="showDay('dinfo')" id="btn-dinfo">
+        <div class="nav-day-icon">🎒</div>
+        <div class="nav-day-info">
+          <div class="nav-day-label">Pakowanie i zasady</div>
+          <div class="nav-day-date">Lista rzeczy</div>
+        </div>
+        <span class="nav-day-badge" id="checkBadge">24</span>
+      </button>
+    </div>
+
+    <div class="sidebar-progress">
+      <div class="sidebar-progress-label">
+        Lista spakowania <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="sidebar-doc-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Regulamin i plan (.doc)
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:auto;opacity:.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
     </a>
 
-    <!-- Grafiki -->
-    <img src="https://mail.google.com/mail/u/0?ui=2&ik=7000953e72&attid=0.1&permmsgid=msg-f:1858900299711643040&th=19cc23f9452dfda0&view=fimg&fur=ip&permmsgid=msg-f:1858900299711643040&sz=s0-l75-ft&attbid=ANGjdJ88RALGwHnWf-xiEs4Rz2f62e5IMY2raLCltgPifJdJrSsvM8xJqllbyikjpNlVGZqjJOISWC3JQc2BOIpp_lFDq3suTGw9s5TNE-BOyM6oQ7d3wKDI8yayUBM&disp=emb&realattid=ii_19cc23f1baef9eb950d1&zw" />
-    <img src="htthps://d-art.ppstatic.pl/kadry/k/r/8d/33/628c871380a52_o_medium.jpg" />
+    <div class="sidebar-footer">
+      <p>Plan wycieczki szkolnej<br>Karpacz / Karkonosze<br>1–3 Luty 2027</p>
+      <p style="margin-top:8px;">Kontakt: wychowawca / organizator</p>
+    </div>
+  </aside>
 
-    <p>Czekamy na ciebie !!</p>
-  </div>
+  <!-- ─── MAIN ─── -->
+  <div class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">
+        Dzień 1 – Przyjazd i zwiedzanie
+        <span>Poniedziałek, 1 Lutego 2027</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="topbar-chip">
+          <span class="dot"></span>
+          Karpacz, dolnośląskie
+        </div>
+        <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="topbar-doc-btn">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Otwórz regulamin
+        </a>
+      </div>
+    </div>
+
+    <div class="content-area">
+
+      <!-- ══════════════════ DZIEŃ 1 ══════════════════ -->
+      <section class="day-section visible" id="d1">
+
+        <div class="day-banner banner-blue">
+          <div class="day-banner-content">
+            <div class="day-banner-kicker">Dzień 1 z 3</div>
+            <h2>Przyjazd i zwiedzanie</h2>
+            <p class="day-banner-sub">Podróż autokarem ze szkoły do Karpacza, zakwaterowanie, spacer po centrum i wizyta w zabytkowej Świątyni Wang – drewnianym kościele sprowadzonym z Norwegii w 1844 roku. Wieczór integracyjny przy ognisku.</p>
+          </div>
+          <div class="day-banner-meta">
+            <div class="day-banner-date">📅 Poniedziałek, 1 Lutego 2027</div>
+            <div class="day-banner-highlights">
+              <span class="highlight-chip">⛪ Świątynia Wang</span>
+              <span class="highlight-chip">🔥 Ognisko</span>
+              <span class="highlight-chip">🚌 ~4,5h jazdy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <!-- LEFT: timeline -->
+          <div>
+            <div class="timeline-wrap">
+              <div class="timeline-wrap-title">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Harmonogram dnia
+              </div>
+              <div class="timeline" id="tl-d1">
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">07:00</span><div class="time-sep"></div></div>
+                    <div class="event-icon-box">🚌</div>
+                    <div class="event-body">
+                      <p class="event-title">Zbiórka uczniów i opiekunów pod szkołą</p>
+                      <p class="event-desc">Sprawdzenie obecności i załadunek bagaży. Prosimy o punktualność – autokar odjeżdża zgodnie z rozkładem.</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">📌 Obowiązkowe</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">07:15</span></div>
+                    <div class="event-icon-box">🛣️</div>
+                    <div class="event-body">
+                      <p class="event-title">Wyjazd autokarem do Karpacza</p>
+                      <p class="event-desc">Trasa z Gliwic do Karpacza – ok. 4,5 godziny. Przewidziana przerwa na trasie. Zabrać przekąski i rozrywkę na drogę.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">11:30</span></div>
+                    <div class="event-icon-box">🏠</div>
+                    <div class="event-body">
+                      <p class="event-title">Przyjazd do Karpacza</p>
+                      <p class="event-desc">Przejazd bezpośrednio do ośrodka noclegowego. Rozlokowanie grup w pokojach.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">12:00</span></div>
+                    <div class="event-icon-box">🛏️</div>
+                    <div class="event-body">
+                      <p class="event-title">Zakwaterowanie i krótki odpoczynek</p>
+                      <p class="event-desc">Rozlokowanie bagaży, czas na odświeżenie się po podróży przed obiadem.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">13:00</span></div>
+                    <div class="event-icon-box">🍽️</div>
+                    <div class="event-body">
+                      <p class="event-title">Obiad w ośrodku</p>
+                      <p class="event-desc">Pierwsza ciepła góralska kuchnia – czas nabrać sił przed popołudniowym zwiedzaniem.</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">14:00</span></div>
+                    <div class="event-icon-box">🏘️</div>
+                    <div class="event-body">
+                      <p class="event-title">Spacer po centrum Karpacza</p>
+                      <p class="event-desc">Pierwsze zetknięcie z miastem – lokalne sklepy, widoki na Karkonosze, orientacja w terenie. Karpacz to jedno z najwyżej położonych miast w Polsce.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">15:00</span></div>
+                    <div class="event-icon-box">⛪</div>
+                    <div class="event-body">
+                      <p class="event-title">Świątynia Wang – drewniany kościół z Norwegii</p>
+                      <p class="event-desc">Zabytkowy kościół klepkowy z XII–XIII w. ze wsi Vågå w Norwegii, zakupiony przez króla Fryderyka Wilhelma IV i przeniesiony do Karpacza w 1844 r. Unikalne rzeźbienia w stylu wikińskim i romańskim. Jeden z najcenniejszych zabytków architektury drewnianej w Polsce.</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">⭐ Atrakcja dnia</span><span class="event-tag tag-green">📷 Foto</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">16:30</span></div>
+                    <div class="event-icon-box">📸</div>
+                    <div class="event-body">
+                      <p class="event-title">Spacer górskim szlakiem i zdjęcia</p>
+                      <p class="event-desc">Lekki spacer w okolicach centrum – pierwsze panoramy na Karkonosze i Śnieżkę. Czas na pamiątkowe fotografie na tle gór.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">18:00</span></div>
+                    <div class="event-icon-box">🥗</div>
+                    <div class="event-body">
+                      <p class="event-title">Kolacja w ośrodku</p>
+                      <p class="event-desc">Ciepła kolacja przed wieczorną integracją.</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">19:00</span></div>
+                    <div class="event-icon-box">🔥</div>
+                    <div class="event-body">
+                      <p class="event-title">Ognisko i spotkanie integracyjne</p>
+                      <p class="event-desc">Grupowe ognisko lub spotkanie integracyjne dla uczniów – poznajemy się lepiej, gry grupowe, śpiewanie, wspólna zabawa w górskim klimacie.</p>
+                      <div class="event-tags"><span class="event-tag tag-green">🎉 Integracja</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">22:00</span></div>
+                    <div class="event-icon-box">🌙</div>
+                    <div class="event-body">
+                      <p class="event-title">Cisza nocna</p>
+                      <p class="event-desc">Jutro długa wycieczka na Śnieżkę – sen jest obowiązkowy!</p>
+                      <div class="event-tags"><span class="event-tag tag-night">😴 Odpoczynek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: info cards -->
+          <div>
+            <div class="side-card">
+              <div class="side-card-title">🌡️ Warunki pogodowe</div>
+              <div class="weather-grid">
+                <div class="weather-item">
+                  <div class="weather-item-icon">🌡️</div>
+                  <div class="weather-item-val">–5 do –10°C</div>
+                  <div class="weather-item-lbl">Temperatura</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">❄️</div>
+                  <div class="weather-item-val">~80–120 cm</div>
+                  <div class="weather-item-lbl">Śnieg Śnieżka</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">💨</div>
+                  <div class="weather-item-val">do 60 km/h</div>
+                  <div class="weather-item-lbl">Wiatr na szczycie</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">☀️</div>
+                  <div class="weather-item-val">8:00–16:00</div>
+                  <div class="weather-item-lbl">Widoczność</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-card">
+              <div class="side-card-title">📍 Atrakcje dnia</div>
+              <div class="attraction-item">
+                <div class="attraction-icon">⛪</div>
+                <div>
+                  <div class="attraction-name">Świątynia Wang</div>
+                  <div class="attraction-desc">Kościół klepkowy z XII–XIII w., sprowadzony z Norwegii. Unikalne wikińskie rzeźbienia, jeden z najcenniejszych zabytków w Polsce.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">🏔️</div>
+                <div>
+                  <div class="attraction-name">Centrum Karpacza</div>
+                  <div class="attraction-desc">Górskie miasto położone na wysokości 520–885 m n.p.m. u podnóża Karkonoszy.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">🔥</div>
+                <div>
+                  <div class="attraction-name">Ognisko integracyjne</div>
+                  <div class="attraction-desc">Wieczorna integracja grupy w górskiej atmosferze.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-card doc-card">
+              <div class="side-card-title">📄 Dokumenty</div>
+              <p class="doc-card-body">Pełny regulamin wycieczki, lista kontaktów, informacje o ubezpieczeniu i szczegółowe zasady uczestnictwa dostępne w Google Docs.</p>
+              <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="doc-open-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Otwórz regulamin i plan
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ DZIEŃ 2 ══════════════════ -->
+      <section class="day-section" id="d2">
+
+        <div class="day-banner banner-green">
+          <div class="day-banner-content">
+            <div class="day-banner-kicker">Dzień 2 z 3</div>
+            <h2>Wycieczka w góry</h2>
+            <p class="day-banner-sub">Pełnodniowa wyprawa w Karkonosze z wejściem na najwyższy szczyt Sudetów – Śnieżkę (1602 m n.p.m.). Szlak przez schronisko, panoramy 360° na Polskę i Czechy, a po zejściu efektowny Dziki Wodospad zamrożony zimą.</p>
+          </div>
+          <div class="day-banner-meta">
+            <div class="day-banner-date">📅 Wtorek, 2 Lutego 2027</div>
+            <div class="day-banner-highlights">
+              <span class="highlight-chip">⛰️ Śnieżka 1602 m</span>
+              <span class="highlight-chip">💧 Dziki Wodospad</span>
+              <span class="highlight-chip">🥾 ~7h szlak</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div>
+            <div class="timeline-wrap">
+              <div class="timeline-wrap-title">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Harmonogram dnia
+              </div>
+              <div class="timeline" id="tl-d2">
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">08:00</span></div>
+                    <div class="event-icon-box">🥐</div>
+                    <div class="event-body">
+                      <p class="event-title">Śniadanie</p>
+                      <p class="event-desc">Solidne śniadanie przed długim dniem w górach. Uwaga: zabrać prowiant i termos z ciepłym napojem na szlak!</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">09:00</span></div>
+                    <div class="event-icon-box">🥾</div>
+                    <div class="event-body">
+                      <p class="event-title">Wyjście na wycieczkę górską w Karkonosze</p>
+                      <p class="event-desc">Start trasy w kierunku Śnieżki. Szlak prowadzi przez karkonoski las świerkowy, górskie polany i skalne rumowiska. Niezbędne: ciepłe ubranie, raki lub buty z dobrą przyczepnością.</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">🎒 Sprzęt obowiązkowy</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">10:30</span></div>
+                    <div class="event-icon-box">☕</div>
+                    <div class="event-body">
+                      <p class="event-title">Przerwa przy schronisku górskim</p>
+                      <p class="event-desc">Odpoczynek, gorąca herbata lub kakao, uzupełnienie energii przed finałowym podejściem na szczyt.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">12:00</span></div>
+                    <div class="event-icon-box">⛰️</div>
+                    <div class="event-body">
+                      <p class="event-title">Podejście na szczyt Śnieżki – 1602 m n.p.m.</p>
+                      <p class="event-desc">Finalne podejście na najwyższy szczyt Sudetów i całych Karkonoszy. Na szczycie: obserwatorium meteorologiczne, kaplica św. Wawrzyńca (XVII w.) i charakterystyczny spodek stacji badawczej. Temperatura na szczycie może wynosić –15 do –20°C przy silnym wietrze – czapka, szalik i rękawice OBOWIĄZKOWE.</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">⭐ Punkt kulminacyjny</span><span class="event-tag tag-gold">📌 Cel dnia</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">13:30</span></div>
+                    <div class="event-icon-box">🏔️</div>
+                    <div class="event-body">
+                      <p class="event-title">Odpoczynek na szczycie i panoramiczne zdjęcia</p>
+                      <p class="event-desc">Panorama 360° – widok na Kotlinę Jeleniogórską, Góry Izerskie, Rudawy Janowickie (Polska) i Riesengebirge (Czechy). Pamiątkowe zdjęcia przy tablicy szczytowej.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">15:00</span></div>
+                    <div class="event-icon-box">⬇️</div>
+                    <div class="event-body">
+                      <p class="event-title">Zejście szlakiem w stronę Karpacza</p>
+                      <p class="event-desc">Ostrożne zejście – w lutym szlak bywa oblodzony. Spokojne tempo, zachowanie w grupie, bezwzględny zakaz oddalania się od opiekunów.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">16:30</span></div>
+                    <div class="event-icon-box">💧</div>
+                    <div class="event-body">
+                      <p class="event-title">Dziki Wodospad na Łomnicy</p>
+                      <p class="event-desc">Malowniczy wodospad na rzece Łomnicy (ok. 13 m wysokości), zimą częściowo pokryty lodem i sopli lodowymi – wyjątkowo efektowny widok. Jeden z najpiękniejszych wodospadów w Karkonoszach.</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">⭐ Atrakcja dnia</span><span class="event-tag tag-green">📷 Foto</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">18:00</span></div>
+                    <div class="event-icon-box">🏠</div>
+                    <div class="event-body">
+                      <p class="event-title">Powrót do ośrodka</p>
+                      <p class="event-desc">Powrót, prysznic i chwila odpoczynku po intensywnym dniu w górach.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">19:00</span></div>
+                    <div class="event-icon-box">🍲</div>
+                    <div class="event-body">
+                      <p class="event-title">Obiadokolacja</p>
+                      <p class="event-desc">Porządny, ciepły posiłek po górskim maratonie – zasłużona nagroda po zdobyciu Śnieżki!</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">20:00</span></div>
+                    <div class="event-icon-box">🎲</div>
+                    <div class="event-body">
+                      <p class="event-title">Czas wolny lub gry integracyjne</p>
+                      <p class="event-desc">Planszówki, kalambury, relaks w grupie. Czas na wspomnienia z górskiej przygody.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">22:00</span></div>
+                    <div class="event-icon-box">🌙</div>
+                    <div class="event-body">
+                      <p class="event-title">Cisza nocna</p>
+                      <p class="event-desc">Jutro stok narciarski – dobry sen to lepsze szusy!</p>
+                      <div class="event-tags"><span class="event-tag tag-night">😴 Odpoczynek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="side-card">
+              <div class="side-card-title">⛰️ Informacje o szlaku</div>
+              <div class="weather-grid">
+                <div class="weather-item">
+                  <div class="weather-item-icon">📏</div>
+                  <div class="weather-item-val">1602 m</div>
+                  <div class="weather-item-lbl">Wysokość szczytu</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">⏱️</div>
+                  <div class="weather-item-val">~7 godz.</div>
+                  <div class="weather-item-lbl">Czas trasy</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">🌡️</div>
+                  <div class="weather-item-val">do –20°C</div>
+                  <div class="weather-item-lbl">Szczyt + wiatr</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">⚠️</div>
+                  <div class="weather-item-val">Średni</div>
+                  <div class="weather-item-lbl">Poziom trudności</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-card">
+              <div class="side-card-title">📍 Punkty trasy</div>
+              <div class="attraction-item">
+                <div class="attraction-icon">🥾</div>
+                <div>
+                  <div class="attraction-name">Karpacz – start (ok. 640 m)</div>
+                  <div class="attraction-desc">Wyjście szlakiem niebieskim lub żółtym w kierunku Śnieżki.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">🏠</div>
+                <div>
+                  <div class="attraction-name">Schronisko Śląski Dom (1410 m)</div>
+                  <div class="attraction-desc">Przerwa odpoczynkowa, ciepłe napoje i przekąski na wysokości.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">⛰️</div>
+                <div>
+                  <div class="attraction-name">Śnieżka – szczyt (1602 m)</div>
+                  <div class="attraction-desc">Najwyższy szczyt Sudetów. Obserwatorium, kaplica i panorama 360°.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">💧</div>
+                <div>
+                  <div class="attraction-name">Dziki Wodospad (ok. 530 m)</div>
+                  <div class="attraction-desc">13-metrowy wodospad na Łomnicy, zimą skuty lodem.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-card doc-card">
+              <div class="side-card-title">📄 Regulamin wycieczki</div>
+              <p class="doc-card-body">Zasady bezpieczeństwa na szlaku, lista kontaktów alarmowych, GOPR i szczegółowe informacje o ubezpieczeniu – w pełnym dokumencie.</p>
+              <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="doc-open-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Otwórz pełny regulamin
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ DZIEŃ 3 ══════════════════ -->
+      <section class="day-section" id="d3">
+
+        <div class="day-banner banner-amber">
+          <div class="day-banner-content">
+            <div class="day-banner-kicker">Dzień 3 z 3</div>
+            <h2>Stok narciarski i powrót</h2>
+            <p class="day-banner-sub">Ostatni dzień zaczynamy na stoku – Karpacz Ski Arena oferuje trasy dla wszystkich poziomów zaawansowania. Po zakończeniu zajęć narciarskich obiad w ośrodku i powrót autokarem do domu. Koniec niezapomnianych 3 dni w Karkonoszach!</p>
+          </div>
+          <div class="day-banner-meta">
+            <div class="day-banner-date">📅 Środa, 3 Lutego 2027</div>
+            <div class="day-banner-highlights">
+              <span class="highlight-chip">⛷️ Karpacz Ski Arena</span>
+              <span class="highlight-chip">🏂 Narty / Snowboard</span>
+              <span class="highlight-chip">🚌 Powrót ~20:30</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div>
+            <div class="timeline-wrap">
+              <div class="timeline-wrap-title">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Harmonogram dnia
+              </div>
+              <div class="timeline" id="tl-d3">
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">08:00</span></div>
+                    <div class="event-icon-box">🥐</div>
+                    <div class="event-body">
+                      <p class="event-title">Śniadanie w ośrodku</p>
+                      <p class="event-desc">Ostatnie śniadanie w górach. Uwaga: spakować bagaże przed wyjazdem na stok – wracamy prosto z areny narciarskiej!</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span><span class="event-tag tag-gold">📌 Spakuj bagaż</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">09:00</span></div>
+                    <div class="event-icon-box">🚌</div>
+                    <div class="event-body">
+                      <p class="event-title">Wyjazd na Karpacz Ski Arena</p>
+                      <p class="event-desc">Transport autokarem na stok narciarski. Zabrać ze sobą ciepłe ubranie, kask i gogle.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">09:30</span></div>
+                    <div class="event-icon-box">⛷️</div>
+                    <div class="event-body">
+                      <p class="event-title">Narty i snowboard na stoku!</p>
+                      <p class="event-desc">Karpacz Ski Arena: nowoczesny ośrodek z wyciągiem krzesełkowym i orczykowym, trasy od łatwych (zielone, niebieskie) do trudnych (czerwone). Wynajem nart, snowboardu, kasków i butów na miejscu. Instruktorzy dostępni dla chętnych. Kask obowiązkowy dla wszystkich uczniów!</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">⭐ Główna atrakcja dnia</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">12:30</span></div>
+                    <div class="event-icon-box">🍔</div>
+                    <div class="event-body">
+                      <p class="event-title">Przerwa na odpoczynek i posiłek przy stoku</p>
+                      <p class="event-desc">Restauracja i bar przy arenie narciarskiej. Czas na uzupełnienie energii i chwilę odpoczynku na siedzeniach z widokiem na stok.</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">13:30</span></div>
+                    <div class="event-icon-box">🏂</div>
+                    <div class="event-body">
+                      <p class="event-title">Dalsza jazda na stoku</p>
+                      <p class="event-desc">Ostatnia godzina na stoku – wykorzystaj każdą chwilę! Idealna okazja do pobicia własnego rekordu szybkości lub nauki nowych trików.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item">
+                  <div class="timeline-dot"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">14:30</span></div>
+                    <div class="event-icon-box">🎿</div>
+                    <div class="event-body">
+                      <p class="event-title">Zakończenie zajęć narciarskich</p>
+                      <p class="event-desc">Zwrot wypożyczonego sprzętu, przebranie się, pożegnanie ze stokiem i zbióra grupy przy autokarze.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">15:00</span></div>
+                    <div class="event-icon-box">🍜</div>
+                    <div class="event-body">
+                      <p class="event-title">Powrót do ośrodka – obiad i zabranie bagaży</p>
+                      <p class="event-desc">Ostatni posiłek w Karpaczu. Odbiór bagaży z ośrodka, pożegnanie z personelem.</p>
+                      <div class="event-tags"><span class="event-tag tag-meal">🍴 Posiłek</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">16:00</span></div>
+                    <div class="event-icon-box">🚌</div>
+                    <div class="event-body">
+                      <p class="event-title">Wyjazd autokarem – droga powrotna</p>
+                      <p class="event-desc">Karpacz → szkoła. Trasa ok. 4,5 godziny. Czas na drzemkę, muzykę i wspomnienia z wycieczki!</p>
+                      <div class="event-tags"><span class="event-tag tag-gold">📌 Sprawdź bagaże</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="timeline-item milestone">
+                  <div class="timeline-dot gold"></div>
+                  <div class="timeline-card">
+                    <div class="time-col"><span class="time-val">20:30</span></div>
+                    <div class="event-icon-box">🏫</div>
+                    <div class="event-body">
+                      <p class="event-title">Powrót pod szkołę – koniec wycieczki! 🎉</p>
+                      <p class="event-desc">Koniec niezapomnianych 3 dni w Karkonoszach! Rodzice/opiekunowie czekają pod szkołą. Do zobaczenia na następnej przygodzie!</p>
+                      <div class="event-tags"><span class="event-tag tag-green">🎉 Koniec wycieczki</span></div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="side-card">
+              <div class="side-card-title">⛷️ Karpacz Ski Arena</div>
+              <div class="weather-grid">
+                <div class="weather-item">
+                  <div class="weather-item-icon">🏔️</div>
+                  <div class="weather-item-val">830–1100 m</div>
+                  <div class="weather-item-lbl">Wysokość stoku</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">🎿</div>
+                  <div class="weather-item-val">5 tras</div>
+                  <div class="weather-item-lbl">Zielone–czerwone</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">🚡</div>
+                  <div class="weather-item-val">Krzesełkowy</div>
+                  <div class="weather-item-lbl">Wyciąg</div>
+                </div>
+                <div class="weather-item">
+                  <div class="weather-item-icon">🏪</div>
+                  <div class="weather-item-val">Na miejscu</div>
+                  <div class="weather-item-lbl">Wypożyczalnia</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-card">
+              <div class="side-card-title">📋 Niezbędnik narciarski</div>
+              <div class="attraction-item">
+                <div class="attraction-icon">⛑️</div>
+                <div>
+                  <div class="attraction-name">Kask obowiązkowy</div>
+                  <div class="attraction-desc">Kask dla wszystkich uczniów – dostępny w wypożyczalni na miejscu.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">🥽</div>
+                <div>
+                  <div class="attraction-name">Gogle narciarskie</div>
+                  <div class="attraction-desc">Ochrona oczu i twarzy – zalecane przy mrozie i silnym słońcu.</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">👖</div>
+                <div>
+                  <div class="attraction-name">Spodnie/kombinezon</div>
+                  <div class="attraction-desc">Nieprzemakalny strój narciarski – nie wolno jeździć w dżinsach!</div>
+                </div>
+              </div>
+              <div class="attraction-item">
+                <div class="attraction-icon">🧤</div>
+                <div>
+                  <div class="attraction-name">Rękawice narciarskie</div>
+                  <div class="attraction-desc">Grube rękawice chroniące przy upadkach i mrozie.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="side-card doc-card">
+              <div class="side-card-title">📄 Dokumenty</div>
+              <p class="doc-card-body">Pełny regulamin wycieczki z zasadami bezpieczeństwa na stoku narciarskim i numerami kontaktowymi dostępny w dokumencie.</p>
+              <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="doc-open-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Otwórz pełny regulamin
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════ PAKOWANIE ══════════════════ -->
+      <section class="day-section" id="dinfo">
+
+        <div class="info-banner">
+          <div>
+            <h2>🎒 Lista pakowania</h2>
+            <p>Odznacz każdą spakowaną rzecz – Twój postęp zapisuje się automatycznie w przeglądarce.</p>
+          </div>
+          <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" class="hero-doc-btn" style="white-space:nowrap;flex-shrink:0;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Regulamin (.doc)
+          </a>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-card-ico">🌡️</div>
+            <div class="info-card-lbl">Temp. w Karpaczu</div>
+            <div class="info-card-val">–5 do –10°C</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-ico">❄️</div>
+            <div class="info-card-lbl">Śnieg na Śnieżce</div>
+            <div class="info-card-val">~80–120 cm</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-ico">💨</div>
+            <div class="info-card-lbl">Wiatr – szczyt</div>
+            <div class="info-card-val">do 60 km/h</div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-ico">⛷️</div>
+            <div class="info-card-lbl">Stok narciarski</div>
+            <div class="info-card-val">Karpacz Ski Arena</div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <div class="checklist-card">
+              <div class="checklist-card-title">🧥 Odzież i wyposażenie</div>
+              <div class="progress-summary">
+                <span id="progLbl1">0 / 12 spakowane</span>
+                <span id="progPct1" style="color:var(--peak);font-weight:600;">0%</span>
+              </div>
+              <div class="checklist-list" id="cl1"></div>
+            </div>
+            <div class="checklist-card" style="margin-top:1.2rem;">
+              <div class="checklist-card-title">📱 Elektronika i dokumenty</div>
+              <div class="progress-summary">
+                <span id="progLbl2">0 / 6 spakowane</span>
+                <span id="progPct2" style="color:var(--peak);font-weight:600;">0%</span>
+              </div>
+              <div class="checklist-list" id="cl2"></div>
+            </div>
+          </div>
+          <div>
+            <div class="checklist-card">
+              <div class="checklist-card-title">🎒 Ekwipunek górski</div>
+              <div class="progress-summary">
+                <span id="progLbl3">0 / 6 spakowane</span>
+                <span id="progPct3" style="color:var(--peak);font-weight:600;">0%</span>
+              </div>
+              <div class="checklist-list" id="cl3"></div>
+            </div>
+            <div class="rules-card" style="margin-top:1.2rem;">
+              <div class="rules-card-title">⚠️ Ważne zasady bezpieczeństwa</div>
+              <div class="rule-item"><span class="rule-item-icon">🚨</span><span>Na szczycie Śnieżki temperatura może spaść do –20°C z silnym wiatrem. Termiczna bielizna i czapka są obowiązkowe.</span></div>
+              <div class="rule-item"><span class="rule-item-icon">📞</span><span>GOPR (Górskie Ochotnicze Pogotowie Ratunkowe): <strong>985</strong> · Ratownictwo: <strong>112</strong></span></div>
+              <div class="rule-item"><span class="rule-item-icon">⛑️</span><span>Na stoku narciarskim kask jest obowiązkowy dla wszystkich uczniów bez wyjątku.</span></div>
+              <div class="rule-item"><span class="rule-item-icon">💊</span><span>Leki przyjmowane regularnie zabrać w oryginalnym opakowaniu i zgłosić opiekunowi.</span></div>
+              <div class="rule-item"><span class="rule-item-icon">🚶</span><span>Na szlaku górskim bezwzględny zakaz oddalania się od grupy bez zgody opiekuna.</span></div>
+              <div class="rule-item"><span class="rule-item-icon">💧</span><span>Nawodnienie w górach jest kluczowe – minimum 1,5 l wody dziennie na szlaku.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /content-area -->
+
+    <footer>
+      <strong>Wycieczka do Karpacza 2027</strong><br>
+      1 – 3 Lutego 2027 · Karkonosze · Śnieżka 1602 m n.p.m.<br>
+      <a href="https://docs.google.com/document/d/1aIF4lQcn_8b4hx2-QHqjC6PoQiMMLYCciBYo-6XSzMs/edit?usp=drive_link" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.55);text-decoration:underline;">📄 Regulamin i pełny plan wycieczki (Google Docs)</a><br>
+      Masz pytania? Skontaktuj się z wychowawcą lub organizatorem wycieczki.
+    </footer>
+
+  </div><!-- /main-content -->
+</div><!-- /app-shell -->
+
+<script>
+// ── SNOWFLAKES ──
+const sl = document.getElementById('snowLayer');
+for(let i=0;i<55;i++){
+  const f=document.createElement('div');
+  f.className='flake';
+  f.textContent='❄';
+  f.style.cssText=`left:${Math.random()*100}%;font-size:${5+Math.random()*10}px;animation-duration:${7+Math.random()*14}s;animation-delay:${-Math.random()*18}s;opacity:${0.3+Math.random()*0.6}`;
+  sl.appendChild(f);
+}
+
+// ── TOPBAR TITLES ──
+const titles = {
+  d1: ['Dzień 1 – Przyjazd i zwiedzanie','Poniedziałek, 1 Lutego 2027'],
+  d2: ['Dzień 2 – Wycieczka w góry','Wtorek, 2 Lutego 2027'],
+  d3: ['Dzień 3 – Stok narciarski i powrót','Środa, 3 Lutego 2027'],
+  dinfo: ['Lista pakowania i zasady','Wycieczka 1–3 Lutego 2027']
+};
+
+// ── SHOW DAY ──
+function showDay(id) {
+  document.querySelectorAll('.day-section').forEach(s=>s.classList.remove('visible'));
+  document.querySelectorAll('.nav-day-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('visible');
+  document.getElementById('btn-'+id).classList.add('active');
+  const t = titles[id];
+  document.getElementById('topbarTitle').innerHTML = t[0]+'<span>'+t[1]+'</span>';
+  revealTimeline(id);
+}
+
+// ── REVEAL TIMELINE ──
+function revealTimeline(dayId) {
+  const tl = document.querySelector('#'+dayId+' .timeline');
+  if(!tl) return;
+  tl.querySelectorAll('.timeline-item').forEach((el,i)=>{
+    el.classList.remove('revealed');
+    setTimeout(()=>el.classList.add('revealed'), i*70+50);
+  });
+}
+setTimeout(()=>revealTimeline('d1'), 300);
+
+// ── CHECKLIST ──
+const cats = [
+  { id:'cl1', lbl:'progLbl1', pct:'progPct1', items:[
+    '🧥 Kurtka zimowa (min. –15°C)', '🧣 Szalik i ciepłe rękawice', '🧢 Czapka wełniana/polarowa',
+    '🧥 Bielizna termiczna (góra+dół)', '👖 Spodnie narciarskie (nieprzemakalny)', '🧦 Grube skarpety (3 pary)',
+    '👟 Buty trekkingowe z agresywną podeszwą', '⛑️ Kask narciarski', '🥽 Gogle narciarskie',
+    '😎 Okulary przeciwsłoneczne', '👕 Zmiana odzieży (3 sety)', '🧴 Krem SPF 50 (słońce na śniegu!)'
+  ]},
+  { id:'cl2', lbl:'progLbl2', pct:'progPct2', items:[
+    '📱 Naładowany telefon + powerbank', '📷 Aparat fotograficzny', '🪪 Dowód osobisty',
+    '💶 Kieszonkowe (gotówka)', '💊 Leki i apteczka osobista', '📋 Karta EKUZ lub ubezpieczenie'
+  ]},
+  { id:'cl3', lbl:'progLbl3', pct:'progPct3', items:[
+    '🎒 Plecak turystyczny (20–30 l)', '💧 Termos / butelka na wodę', '🥪 Prowiant na szlak',
+    '🔦 Latarka czołowa (baterie!)', '🩹 Mała apteczka (plastry, ibuprom)', '🗺️ Mapa Karkonoszy lub app offline'
+  ]}
+];
+
+const allSaved = JSON.parse(localStorage.getItem('karpaczPack2027') || '{}');
+
+function buildChecklist(cat) {
+  const el = document.getElementById(cat.id);
+  const saved = allSaved[cat.id] || [];
+  cat.items.forEach((item,idx)=>{
+    const div=document.createElement('div');
+    div.className='check-item'+(saved.includes(idx)?' done':'');
+    div.innerHTML=`<div class="check-box">${saved.includes(idx)?'✓':''}</div><span class="check-label">${item}</span>`;
+    div.addEventListener('click',()=>{
+      div.classList.toggle('done');
+      const box=div.querySelector('.check-box');
+      const isDone=div.classList.contains('done');
+      box.innerHTML=isDone?'✓':'';
+      if(isDone){box.style.background='var(--peak)';box.style.borderColor='var(--peak)';box.style.color='#fff';}
+      else{box.style.background='';box.style.borderColor='';box.style.color='';}
+      saveProgress();
+      updateProgress(cat);
+    });
+    el.appendChild(div);
+  });
+  updateProgress(cat);
+}
+
+function saveProgress() {
+  const data={};
+  cats.forEach(cat=>{
+    data[cat.id]=[...document.querySelectorAll('#'+cat.id+' .check-item.done')].map(el=>[...document.querySelectorAll('#'+cat.id+' .check-item')].indexOf(el));
+  });
+  localStorage.setItem('karpaczPack2027',JSON.stringify(data));
+  updateSidebarProgress();
+}
+
+function updateProgress(cat) {
+  const total=cat.items.length;
+  const done=document.querySelectorAll('#'+cat.id+' .check-item.done').length;
+  const pct=Math.round(done/total*100);
+  document.getElementById(cat.lbl).textContent=done+' / '+total+' spakowane';
+  document.getElementById(cat.pct).textContent=pct+'%';
+}
+
+function updateSidebarProgress() {
+  const total=cats.reduce((s,c)=>s+c.items.length,0);
+  const done=cats.reduce((s,c)=>s+document.querySelectorAll('#'+c.id+' .check-item.done').length,0);
+  const pct=Math.round(done/total*100);
+  document.getElementById('progressPct').textContent=pct+'%';
+  document.getElementById('progressFill').style.width=pct+'%';
+  const remaining=total-done;
+  document.getElementById('checkBadge').textContent=remaining>0?remaining:'✓';
+}
+
+cats.forEach(buildChecklist);
+updateSidebarProgress();
+</script>
 </body>
 </html>
